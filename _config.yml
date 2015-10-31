@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
-timezone:
+title: Welcome to Vita's blog
+subtitle: Vita John - Python Programmer
+description: Keep thinking
+author: Vita John
+language: zh
+timezone: Asia/Urumqi
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: vita.lol
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -63,16 +63,20 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
+#deploy:
+  #type: rsync
+  #host: vita.lol
+  #user: vita
+  #root: /home/vita/blog
+  #port: 22
+  #delete: true
+  #verbose: true
+  #ignore_errors: false
+
 deploy:
-  type: rsync
-  host: vita.lol
-  user: vita
-  root: /home/vita/blog
-  port: 22
-  delete: true
-  verbose: true
-  ignore_errors: false
+  type: heroku
+  repo: git@heroku.com:dreadful-plague-9216.git
