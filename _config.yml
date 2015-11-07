@@ -71,6 +71,15 @@ theme: next
 duoshuo_shortname: vita-lol
 duoshuo_share: true
 
+# Social links
+social:
+  github: https://github.com/moonshadow
+  twitter: https://twitter.com/moonshadow520
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
