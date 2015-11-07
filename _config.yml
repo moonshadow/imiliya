@@ -3,6 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
+#
 title: Welcome to Vita's blog
 subtitle: Vita John - Python Programmer
 description: Keep thinking
@@ -78,6 +79,12 @@ theme: next
   #verbose: true
   #ignore_errors: false
 
+#deploy:
+  #type: heroku
+  #repo: git@heroku.com:dreadful-plague-9216.git
+
 deploy:
-  type: heroku
-  repo: git@heroku.com:dreadful-plague-9216.git
+  type: git
+  repo: git@github.com:moonshadow/moonshadow.github.io
+  branch: master
+  message: site update
