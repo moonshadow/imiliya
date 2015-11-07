@@ -67,6 +67,11 @@ pagination_dir: page
 ## Themes: http://hexo.io/themes/
 theme: next
 
+#disqus_shortname: vita-lol
+duoshuo_shortname: vita-lol
+duoshuo_share: true
+
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 #deploy:
