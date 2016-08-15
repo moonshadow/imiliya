@@ -4,16 +4,16 @@
 
 # Site
 #
-title: Welcome to Vita's blog
-subtitle: Vita John - Python Programmer
-description: Keep thinking
-author: Vita John
-language: zh
+title: Welcome to Moonshadow's blog
+subtitle: Wang Haowei - Python Programmer
+description: Python, Pythoner, Pythonest!
+author: Wang Haowei
+language: zh-Hans
 timezone: Asia/Urumqi
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: vita.lol
+url: imiliya.com
 root: /
 
 permalink: :year/:month/:day/:title/
@@ -67,9 +67,9 @@ pagination_dir: page
 ## Themes: http://hexo.io/themes/
 theme: next
 
-#disqus_shortname: vita-lol
-duoshuo_shortname: vita-lol
-duoshuo_share: true
+disqus_shortname: imiliya
+# duoshuo_shortname: vita-lol
+# duoshuo_share: true
 
 # Social links
 social:
@@ -96,9 +96,9 @@ feed:
 #deploy:
   #type: heroku
   #repo: git@heroku.com:dreadful-plague-9216.git
-
-deploy:
-  type: git
-  repo: git@github.com:moonshadow/moonshadow.github.io
-  branch: master
-  message: site update
+#
+# deploy:
+#   type: git
+#   repo: git@github.com:moonshadow/moonshadow.github.io
+#   branch: master
+#   message: site update
