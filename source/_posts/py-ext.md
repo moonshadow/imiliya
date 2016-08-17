@@ -74,13 +74,13 @@ gcc -shared -o libutils.so utils.o
 import ctypes
 
 
-mod = ctypes.cdll.LoadLibrary('./libutils.so')
+utils = ctypes.cdll.LoadLibrary('./libutils.so')
 
-factorial = mod.factorial
+factorial = utils.factorial
 factorial.argtypes = (ctypes.c_int,)
 factorial.restype = ctypes.c_int
 
-_swap  = mod.swap
+_swap  = utils.swap
 _swap.argtypes = (ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
 
 
@@ -102,9 +102,9 @@ if __name__ == "__main__":
     print('x is %s and y is %s' % (x, y))
 ```
 
-`mod = ctypes.cdll.LoadLibrary('./libutils.so')` 载入了已经编译好的`libutils.so`, factorial和swap两个函数变成了模块的locals.（如果不是自己编译的模块而是想用系统的C语言共享库，参考`cypes.utils`的`find_library`方法，路径通常都是`/usr/lib` 和 `/usr/local/lib`， linux操作系统默认都是*libxxx.so*的格式， 而os x则是*libxxx.dylib*)
+`utils = ctypes.cdll.LoadLibrary('./libutils.so')` 载入了已经编译好的`libutils.so`, factorial和swap两个函数变成了模块的locals.（如果不是自己编译的模块而是想用系统的C语言共享库，参考`cypes.utils`的`find_library`方法，路径通常都是`/usr/lib` 和 `/usr/local/lib`， linux操作系统默认都是*libxxx.so*的格式， 而os x则是*libxxx.dylib*)
 
-对于`factorial`函数，只需要把python的int对象转换成对应的ctype类型再传入factorial函数， 同时需要定义返回的结果类型，把factory函数返回的int转换成Python的int对象
+对于`factorial`函数，只需要把python的int对象转换成对应的ctype类型再传入factorial函数， 同时需要定义返回的结果类型，把factorial函数返回的int转换成Python的int对象
 
 `swap`函数稍微麻烦一点，因为Python不能直接访问指针，所以需要把已有的c函数稍微做个封装， 不过思路一样就是了.
 
@@ -130,9 +130,9 @@ import ctypes
 from timeit import timeit
 
 
-mod = ctypes.cdll.LoadLibrary('./libutils.so')
+utils = ctypes.cdll.LoadLibrary('./libutils.so')
 
-factorial = mod.factorial
+factorial = utils.factorial
 factorial.argtypes = (ctypes.c_int,)
 factorial.restype = ctypes.c_int
 
