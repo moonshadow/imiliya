@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
 第一个例子就到这里了，ctypes打开了Python调用c代码库的大门。 然而很多时候并没有现成的c库给我们调， 那么就需要自己写Python的C Extension了，下一篇我们先研究一下如何裸写一个Python的C extension模块吧.
 
-上面示例的代码已经放到[**github**][way-to-python-ninja]上面了，可以拉下来参照[**ctypes**]的文档自己玩玩, 如果你有更好的sample或者建议欢迎一起交流.
+上面示例的代码已经放到[**github**][way-to-python-ninja]上面了，可以拉下来参照[**ctypes**][ctypes]的文档自己玩玩, 如果你有更好的sample或者建议欢迎一起交流.
 
 
 [ctypes]: https://docs.python.org/3.5/library/ctypes.html#module-ctypes
