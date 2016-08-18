@@ -140,7 +140,7 @@ def py_factorial(n):
     assert isinstance(n, int)
     if n <= 0:
         return 1
-    return py_factorial(n-1)
+    return py_factorial(n-1) * n
 
 if __name__ == "__main__":
     number = 100000
