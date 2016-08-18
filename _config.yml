@@ -16,7 +16,7 @@ timezone: Asia/Urumqi
 url: imiliya.com
 root: /
 
-permalink: http://:year/:month/:day/:title/
+permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
