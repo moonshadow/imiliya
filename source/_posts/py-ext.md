@@ -36,7 +36,7 @@ tags:
 
 ## How to call C function in Python code?
 
-python标准库提供了[**ctypes**][ctypes]模块, 可以帮助我们把DLL(windows的玩意儿)或者shared libraries(共享库)中的函数封装成可以直接调用的Python函数。如果发现需要的某个工具已经有C语言的library, 我们就不需要重新用Python实现相同功能的模块， 既保证了效率还能省去性能的烦恼。下面是一个简单的例子:
+python标准库提供了[**ctypes**][ctypes]模块, 可以帮助我们把DLL或者shared libraries(共享库)中的函数封装成可以直接调用的Python函数。如果发现需要的某个工具已经有C语言的library, 我们就不需要重新用Python实现相同功能的模块， 既保证了效率还能省去性能的烦恼。下面是一个简单的例子:
 
 首先我们创建一个C文件`utils.c`, 定义factorial和swap两个函数.
 
@@ -62,7 +62,7 @@ void swap(int *a, int *b) {
 gcc -c -Wall -Werror utils.c
 ```
 
-再把刚生成的目标文件转化成可以动态链接的共享库.
+再把刚生成的目标文件转化成动态链接库.
 
 ```
 gcc -shared -o libutils.so utils.o
