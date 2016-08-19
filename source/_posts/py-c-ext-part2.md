@@ -326,7 +326,7 @@ Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是it
 
 讲了这么多引用计数的东西好像已经偏题了, 看得出来在C Extension里面对引用计数的处理也是一件比较tricky的事情。如果你对这块很感兴趣，直接阅读[官方文档](https://docs.python.org/3/extending/extending.html)是一个不错的选择, 这篇文章[http://edcjones.tripod.com/refcount.html](http://edcjones.tripod.com/refcount.html)则做了一定的解释和补充。 please keep reading patiently!
 
-如果你对 *borrow*，*own* 这一块很感兴趣 ,隔壁有一门叫做[Rust](https://doc.rust-lang.org)的语言值得尝试, 可以看看它的 *ownership system* 是怎么玩的。
+如果你对 *borrow*，*own* 这一块很感兴趣 ,隔壁有一门叫做[Rust](https://doc.rust-lang.org/book/ownership.html)的语言值得尝试, 可以看看它的 *ownership system* 是怎么玩的。
 
 ## 总结
 
