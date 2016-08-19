@@ -186,7 +186,7 @@ setup(name='sample', ext_modules=[
 
 ## 错误和异常(Errors and Exception)
 
-Python解释器有一个不成文的规定， 当函数失败的时候，需要设置一个异常信息，并且返回错误值，异常信息保存在解释器的一个静态全局变量中。如果这个变量的值为NULL，说明没有异常发生。除此之外还有两个全局变量，一个保存了异常信息对应的描述，另一个保存了发生异常时的整个调用堆栈, 它们对应了sys.exc_info()结果的三个元素。
+Python解释器有一个不成文的规定， 当函数失败的时候，需要设置一个异常信息，并且返回错误值，异常信息保存在解释器的一个静态全局变量中。如果这个变量的值为NULL(空指针)，说明没有异常发生。除此之外还有两个全局变量，一个保存了异常信息对应的描述，另一个保存了发生异常时的整个调用堆栈, 它们对应了sys.exc_info()结果的三个元素。
 
 前面用到的PyErr_SetString()方法，第一个参数就是我们定义的异常类对象,第二个参数是关联的异常信息描述。 *PyErr_SetString(SpamError, "System command failed")* 设置了全局的异常信息,Python解释器发现这个异常信息的时候，会跳转到异常处理流程(如果想了解Python解释器是怎么运作的, 异常机制又是如何实现的，再次推荐《Python源码剖析》这本书)。
 
@@ -320,6 +320,8 @@ bug(PyObject *list)
 ```
 
 Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print就可能产生意想不到的bug!
+
+用borrow还是own其实并没有明确的规定，取决于那个模型在特定场景下使用更加方便，我们可以通过官方文档知道某个Python C API的函数具体用的borrow还是own。
 
 
 讲了这么多引用计数的东西好像已经偏题了, 看得出来在C Extension里面对引用计数的处理也是一件比较tricky的事情。如果你对这块很感兴趣，直接阅读[官方文档](https://docs.python.org/3/extending/extending.html)是一个不错的选择, 这篇文章[http://edcjones.tripod.com/refcount.html](http://edcjones.tripod.com/refcount.html)则做了一定的解释和补充。 please keep reading patiently!
