@@ -24,6 +24,8 @@ tags:
 1. Modules
 1. Logging
 
+<!-- more -->
+
 ## First of first (Python C Extension)
 
 不知道大家觉得Python最神秘的地方在哪里。反正在我的经验看来，最搞不清扯不明的地方就是所谓的Python C Extension Module了。ctypes， cffi， swig， cython, numba这些名词，听上去就觉得好可怕, 想搜个像样子的介绍文章出来都难, 直接看官方文档吧有感觉有点overwhelming. 所以我希望通过C Extension这个系列的文章，把这些玩意儿一个一个都探索一下。 本人C语言水平有限，如果有胡说八道的地方， 欢迎指正，大家一起学习进步😀。 以后所有文章只针对Python3，关于*Python2 or Python3*, 以后也会找机会讨论一下, 如果有必要联系Python2的相关知识我会专门指出, 文中所有涉及到编译c代码的地方都假设读者使用的是类unix的操作系统(原因是我对windows的生态系统实在一无所知)。
