@@ -319,7 +319,7 @@ bug(PyObject *list)
 }
 ```
 
-Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print的话——core dump!
+Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print就可能产生意想不到的bug!
 
 
 讲了这么多引用计数的东西好像已经偏题了, 看得出来在C Extension里面对引用计数的处理也是一件比较tricky的事情。如果你对这块很感兴趣，直接阅读[官方文档](https://docs.python.org/3/extending/extending.html)是一个不错的选择, 这篇文章[http://edcjones.tripod.com/refcount.html](http://edcjones.tripod.com/refcount.html)则做了一定的解释和补充。 please keep reading patiently!
