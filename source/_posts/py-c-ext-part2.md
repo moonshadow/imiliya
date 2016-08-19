@@ -344,6 +344,8 @@ PyModule_AddObject(m, "error", SpamError);
 
 PyArg_ParseTuple的format参数格式请参考[PyArg_ParseTuple][py-arg], 与之对应的还有`Py_BuildValue` 函数， 用来构造Python对象.
 
+[相关代码](https://github.com/moonshadow/way-to-python-ninja/tree/master/python-c-ext/impl-python-c-ext)
+
 Anyway, 手动实现一个Python C Extension始终是一件很麻烦的事(还要了解Python的引用计数是怎么玩的)。如果只是简单系统调用，用`ctypes`就能直接搞定， 那专心写好C代码，然后直接让Python像用普通模块一样把它用起来岂不是更加方便？ 下一篇我们就来看看一个叫做CFFI的第三方库又是怎么实现在Python中调用C语言库的吧。
 
 [c-ext]: https://docs.python.org/3/extending/extending.html
