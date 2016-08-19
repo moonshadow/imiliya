@@ -11,7 +11,7 @@ TL; DR.
 
 ## 什么是Python C Extension？
 
-所谓[Python C Extension][c-ext]， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.
+所谓[Python C Extension][c-ext]， 是指在CPython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.
 
 ## 简单实现
 
