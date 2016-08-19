@@ -94,7 +94,7 @@ WTF, 都是些什么鬼玩意儿?
 
 直接cd到`/usr/local/Cellar/python3/3.5.2_1/Frameworks/Python.framework/Versions/3.5/include/python3.5m`目录就能找到这个header文件, Python源码的其他header文件也都在这里了。
 
-`static PyObject *SpamError`定义了一个SpamError对象, 根据名字可以猜到这将是一个异常类。Python的所有对象对应的都是一个`PyObject`的结构， 你可以到object.h头文件里面看看PyObject是怎么定义的，不过只能看得一脸懵逼就是了，如果对Python源码好奇，墙裂推荐《Python源码分析》这本书。 .
+`static PyObject *SpamError`定义了一个SpamError对象, 根据名字可以猜到这将是一个异常类。Python的所有对象对应的都是一个`PyObject`的结构， 你可以到object.h头文件里面看看PyObject是怎么定义的，不过只能看得一脸懵逼就是了，如果对Python源码好奇，墙裂推荐《Python源码剖析》这本书。 .
 
 ```
 static PyObject *spam_system(PyObject *self, PyObject *args) {
@@ -188,7 +188,7 @@ setup(name='sample', ext_modules=[
 
 Python解释器有一个不成文的规定， 当函数失败的时候，需要设置一个异常信息，并且返回错误值，异常信息保存在解释器的一个静态全局变量中。如果这个变量的值为NULL，说明没有异常发生。除此之外还有两个全局变量，一个保存了异常信息对应的描述，另一个保存了发生异常时的整个调用堆栈, 它们对应了sys.exc_info()结果的三个元素。
 
-前面用到的PyErr_SetString()方法，第一个参数就是我们定义的异常类对象,第二个参数是关联的异常信息描述。 *PyErr_SetString(SpamError, "System command failed")* 设置了全局的异常信息,Python解释器发现这个异常信息的时候，会跳转到异常处理流程(如果想了解Python解释器是怎么运作的, 异常机制又是如何实现的，再次推荐《Python源码分析》这本书)。
+前面用到的PyErr_SetString()方法，第一个参数就是我们定义的异常类对象,第二个参数是关联的异常信息描述。 *PyErr_SetString(SpamError, "System command failed")* 设置了全局的异常信息,Python解释器发现这个异常信息的时候，会跳转到异常处理流程(如果想了解Python解释器是怎么运作的, 异常机制又是如何实现的，再次推荐《Python源码剖析》这本书)。
 
 ## 一点题外话——引用计数(Reference Counts)
 
