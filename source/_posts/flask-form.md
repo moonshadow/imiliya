@@ -11,6 +11,8 @@ tags:
 
 用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type `application/json`传递的数据。先来来看一个样例:
 
+<!-- more -->
+
 ```Python
 from flask import request
 @app.route('/register', methods=['POST'])
