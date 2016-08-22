@@ -388,6 +388,6 @@ class Form(metaclass=FormFieldMeta):
 
 Congrats! We'are done! 我们实现了一个声明式的基于decorator的flask表单验证模块。你可以试试现在再跑一下之前的测试用例。相关代码请参考[flask form](https://github.com/moonshadow/way-to-python-ninja/tree/master/advanced-flask/form)。 如果测试通过，接下来就可以走TDD的第三步——refactor了, enjoy yourself!。
 
-回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global... 庆祝一下我们的成果吧！如果你对整个模块的实现都已经很清楚的理解了，恭喜你，You'are an Python veteran now. 如果你还有很多困惑，也不要着急，把每个点的功课一个一个做好，多动脑筋思考，相信最后肯定也能理解的。
+回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global... 庆祝一下我们的成果吧！如果你对整个模块的实现都已经了然于胸，恭喜你，You'are an Python veteran now! 如果你还有很多困惑或者感觉举步维艰，也不要着急，把每个点的功课一个一个做好，多动脑筋思考, 试着以理解这个模块为目标好好地学一波Python吧, Tt deserves! I promise。
 
 Anyway, 如果你有更好的设计或者更加优雅的实现，不妨也拿出来分享一下。
