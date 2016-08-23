@@ -9,7 +9,7 @@ tags:
 
 ## 背景
 
-用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type `application/json`传递的数据。先来来看一个样例:
+用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过设置Content-Type为`application/json`传递的数据。先来看一个样例:
 
 <!-- more -->
 
@@ -45,7 +45,7 @@ def register():
       register_native(username, passowrd, age)
 ```
 
-我们花费了大量的精力在获取和验证username, age, password和from_这几个字段， register的view层看上去就感觉很混乱，要改动某个字段的验证逻辑，还要在register函数 中找到对应这个字段的验证代码。有没有办法把表单验证的逻辑从视图层抽离出去，让视图层只做dispatch的活呢？
+我们花费了大量的精力在获取和验证username, age, password和from_这几个字段， register的view层看上去就感觉很混乱，要改动某个字段的验证逻辑，还要在register函数 中找到对应这个字段的验证代码。有没有办法把表单验证的逻辑从视图层抽离出去，让视图层只做dispatch的工作呢？
 
 有django开发经验的同学会想那就来写个middleware吧，Flask其实也提供了middleware机制， 不过这个middleware是底层werkzeug库封装的wsgi中间件，不能很好地和flask框架的上下文结合起来。 其实我们完全可以从Python语言层面触发，利用Python强大的抽象能力，用最简单的方式解决问题。对， 你是不是也想到了，Python的万金油大杀器——decorator!
 
@@ -73,7 +73,7 @@ class RegisterForm:
     from_ = String('args', required=True, enums=('qq', 'weibo', 'native'))
 ```
 
-`form`和`args`分别表示从form和querystring获取数据。
+`form`和`args`分别表示从formData和querystring获取数据。
 
 如果我们能够实现`RegisterForm`, `String`, `Int`的功能, 让开发者只需要声明`RegisterForm`和对应的字段就能完成表单验证的工作, 那么视图层就能完全解脱出来，同时声明式的表单类也更容易维护。至少上面的register函数和RegisterForm已经非常赏心悦目了, 而且十分Pythonic。
 
@@ -165,7 +165,7 @@ class Form:
         return self._view_func(*args, **kwargs)
 ```
 
-Ok, 看上去好像什么也没做什么的。不过还记得之前的`from some_where import form`么，这个form对象又是什么东西？怎么可以直接import进来用了，它不是全局变量么？不，你似乎忘了有一个叫做 **threadl(greenlet)local** 的东西。Flask框架封装了threadlocal，提供了更加高级的API给开发者使用，比如`flask.request`就是一个threadlocal， 我们的form对象其实就是模拟了`flask.request`的机制。
+Ok, 看上去好像什么也没做什么的。不过还记得之前的`from some_where import form`么，这个form对象又是什么东西？怎么可以直接import进来用了，它不是全局变量么？不，你似乎忘了有一个叫做 **thread(greenlet)local** 的东西。Flask框架封装了threadlocal，提供了更加高级的API给开发者使用，比如`flask.request`就是一个threadlocal， 我们的form对象其实就是模拟了`flask.request`的机制。
 
 ```python
 from flask.globals import _app_ctx_stack, _app_ctx_err_msg
@@ -249,7 +249,7 @@ class FormField:
         return data
 ```
 
-FormField是一个BaseClass，注意到`__init__`方法的标签了么，`def __init__(self, source='', *, name=''...`中 '\*' 的意思是后面的参数必须是keyword的方式传进来，`FormField('args', name='username')` is Ok while `FormField('args', 'username')` is not. 这个Python3的新特性带来的好处是通过将某些参数设计成keyword only的形式，使API更加清晰明了，降低了调用方错误传参的可能性。 `__get___`方法拦截了对`FormField`实例的访问，`_get_request_data`解析request来获取原始数据， `_none_value`这个哨兵表示request中找不到对应字段。解析完request之后，需要调用`process`方法来对数据做校验和转化，子类通过override这个方法来实现自己的校验逻辑。 `self.__dict__[name] = result`这一步十分tricky， 通过把结果直接放到form对象的__dict__属性中，下次访问同名属性的时候就直接从`__dict__`中取出返回，而不需要在走一遍descriptor的`__get__`方法了。
+FormField是一个BaseClass，注意到`__init__`方法的标签了么，`def __init__(self, source='', *, name=''...`中 '\*' 的意思是后面的参数必须是keyword的方式传进来，`FormField('args', name='username')` is Ok while `FormField('args', 'username')` is not. 这个Python3的新特性带来的好处是通过将某些参数设计成keyword only的形式，使API更加清晰明了，降低了调用方错误传参的可能性。 `__get___`方法拦截了对`FormField`实例的访问，`_get_request_data`解析request来获取原始数据， `_none_value`这个哨兵表示request中找不到对应字段。解析完request之后，需要调用`process`方法来对数据做校验和转化，子类通过override这个方法来实现自己的校验逻辑。 `self.__dict__[name] = result`这一步十分tricky， 通过把结果直接放到form对象的`__dict__`属性中，下次访问同名属性的时候就直接从`__dict__`中取出返回，而不需要再走一遍descriptor的`__get__`方法了。
 
 下面是子类的实现
 ```python
@@ -388,6 +388,6 @@ class Form(metaclass=FormFieldMeta):
 
 Congrats! We'are done! 我们实现了一个声明式的基于decorator的flask表单验证模块。你可以试试现在再跑一下之前的测试用例。相关代码请参考[flask form](https://github.com/moonshadow/way-to-python-ninja/tree/master/advanced-flask/form)。 如果测试通过，接下来就可以走TDD的第三步——refactor了, enjoy yourself!。
 
-回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global... 庆祝一下我们的成果吧！如果你对整个模块的实现都已经了然于胸，恭喜你，You'are an Python veteran now! 如果你还有很多困惑或者感觉举步维艰，也不要着急，把每个点的功课一个一个做好，多动脑筋思考, 试着以理解这个模块为目标好好地学一波Python吧, Tt deserves! I promise。
+回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global... 庆祝一下我们的成果吧！如果你对整个模块的实现都已经了然于胸，恭喜你，You'are a Python veteran now! 如果你还有很多困惑或者感觉举步维艰，也不要着急，把每个点的功课一个一个做好，多动脑筋思考, 试着以理解这个模块为目标好好地学一波Python吧, it deserves! I promise。
 
 Anyway, 如果你有更好的设计或者更加优雅的实现，不妨也拿出来分享一下。
