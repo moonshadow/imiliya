@@ -13,7 +13,7 @@ timezone: Asia/Urumqi
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: imiliya.com
+url: http://imiliya.com
 root: /
 
 permalink: :year/:month/:day/:title/
