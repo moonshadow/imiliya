@@ -1,1 +1,1 @@
-## Personal blog mainly on Python
+## Blog is Dead
